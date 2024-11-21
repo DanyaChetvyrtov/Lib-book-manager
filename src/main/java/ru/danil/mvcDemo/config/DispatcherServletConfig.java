@@ -28,7 +28,7 @@ public class DispatcherServletConfig
         return new String[]{"/"};
     }
 
-    // Если я не ошибаюсь, нижние два метода для возможности делать put запросы
+    // Если я не ошибаюсь, нижние два метода для возможности делать PATCH, DELETE и т.п запросы
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
@@ -40,6 +40,7 @@ public class DispatcherServletConfig
                 new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
     }
 
+    // Класс для работы с русским языком
     private void registerCharacterEncodingFilter(ServletContext aContext) {
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();

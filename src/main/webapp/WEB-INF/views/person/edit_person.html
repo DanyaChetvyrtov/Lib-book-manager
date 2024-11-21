@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+    <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getPerson_id()})}" th:object="${person}">
+        <div>
+            <label for="fio">Имя: </label>
+            <input type="text" th:field="*{FIO}" id="fio">
+
+            <label for="fio">Дата рождения: </label>
+            <input type="text" th:field="*{date_of_birth}" id="date_of_birth">
+
+            <input type="submit" value="Изменить">
+        </div>
+    </form>
+</body>
+</html>
