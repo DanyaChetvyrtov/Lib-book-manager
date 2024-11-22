@@ -2,16 +2,22 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>People List</title>
+    <link rel="stylesheet" href="/resources/styles/person_list.css">
 </head>
 <body>
-    <h1>All people</h1>
-    <div th:each="person : ${people}">
-        <span th:text="${person.getPerson_id()}"></span>
-        <a th:href="@{/people/{id}(id=${person.getPerson_id()})}" th:text="${person.getFIO()}"></a>
-        <span th:text="${person.getDate_of_birth()}"></span>
-        <br/>
+<div class="list__container">
+    <h1>All People</h1>
+    <div class="list__content">
+        <div class="person-card" th:each="person : ${people}">
+            <div class="person-info">
+                <p><strong>ID:</strong> <span th:text="${person.getPerson_id()}"></span></p>
+                <p><strong>Name:</strong> <span th:text="${person.getFIO()}"></span></p>
+                <p><strong>Birth Date:</strong> <span th:text="${person.getDate_of_birth()}"></span></p>
+            </div>
+        </div>
     </div>
     <a th:href="@{/people/new}">Добавить</a>
+</div>
 </body>
 </html>
