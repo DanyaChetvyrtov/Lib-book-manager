@@ -7,6 +7,9 @@
 <body>
     <p th:text="${person.getFIO()}"></p>
     <p th:text="${person.getDate_of_birth()}"></p>
+
+    <a th:href="@{/people/{id}/edit(id=${person.getPerson_id()})}">Обновить</a>
+
     <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPerson_id()})}">
         <input type="submit" th:value="Удалить">
     </form>

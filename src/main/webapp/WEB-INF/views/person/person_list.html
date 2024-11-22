@@ -8,9 +8,10 @@
     <h1>All people</h1>
     <div th:each="person : ${people}">
         <span th:text="${person.getPerson_id()}"></span>
-        <span th:text="${person.getFIO()}"></span>
+        <a th:href="@{/people/{id}(id=${person.getPerson_id()})}" th:text="${person.getFIO()}"></a>
         <span th:text="${person.getDate_of_birth()}"></span>
         <br/>
     </div>
+    <a th:href="@{/people/new}">Добавить</a>
 </body>
 </html>

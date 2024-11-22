@@ -1,10 +1,24 @@
 package ru.danil.mvcDemo.model;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Person {
     private int person_id;
+
+    @NotEmpty
+    @Size(min = 10, max = 60, message = "Ваше фио должно содержать от 2х до 30 символов")
+    @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
+            message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)")
     private String FIO;
+
+    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date_of_birth;
 
     public Person(int person_id, String FIO, LocalDate date_of_birth) {

@@ -1,7 +1,9 @@
 package ru.danil.mvcDemo.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.danil.mvcDemo.DAO.PersonDAO;
 import ru.danil.mvcDemo.model.Person;
@@ -36,7 +38,13 @@ public class PersonController {
     }
 
     @PostMapping
-    public String createNewPerson(@ModelAttribute("person") Person person){
+    public String createNewPerson(
+            @ModelAttribute("person") @Valid Person person,
+            BindingResult bindingResult
+    ){
+        if(bindingResult.hasErrors())
+            return "person/create_person";
+
         personDAO.addPerson(person);
         return "redirect: /people";
     }
