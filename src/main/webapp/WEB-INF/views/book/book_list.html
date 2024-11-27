@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+    <link rel="stylesheet" href="/resources/styles/list_cards.css">
+</head>
+<body>
+<div class="list__container">
+    <h1>All Books</h1>
+    <div class="list__content">
+        <a class="card" th:href="@{/books/{id}(id=${book.getBook_id()})}" th:each="book : ${books}">
+            <div class="card__info">
+                <p><strong>ID:</strong> <span th:text="${book.getBook_id()}"></span></p>
+                <p><strong>Title:</strong> <span th:text="${book.getTitle()}"></span></p>
+                <p><strong>Author:</strong> <span th:text="${book.getAuthor()}"></span></p>
+            </div>
+        </a>
+    </div>
+    <div class="create__btn">
+        <a th:href="@{/books/new}">Добавить</a>
+    </div>
+</div>
+</body>
+</html>

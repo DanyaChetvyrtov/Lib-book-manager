@@ -31,6 +31,7 @@ public class SpringConfig implements WebMvcConfigurer {
         this.environment = environment;
     }
 
+    // Для подключения css и Js в папке webapp/resources
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")

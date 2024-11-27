@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>People List</title>
-    <link rel="stylesheet" href="/resources/styles/person_list.css">
+    <link rel="stylesheet" href="/resources/styles/list_cards.css">
 </head>
 <body>
 <div class="list__container">
     <h1>All People</h1>
     <div class="list__content">
-        <div class="person-card" th:each="person : ${people}">
-            <div class="person-info">
+        <a class="card" th:href="@{/people/{id}(id=${person.getPerson_id()})}" th:each="person : ${people}">
+            <div class="card__info">
                 <p><strong>ID:</strong> <span th:text="${person.getPerson_id()}"></span></p>
                 <p><strong>Name:</strong> <span th:text="${person.getFIO()}"></span></p>
                 <p><strong>Birth Date:</strong> <span th:text="${person.getDate_of_birth()}"></span></p>
             </div>
-        </div>
+        </a>
     </div>
-    <a th:href="@{/people/new}">Добавить</a>
+    <div class="create__btn">
+        <a th:href="@{/people/new}">Добавить</a>
+    </div>
 </div>
 </body>
 </html>

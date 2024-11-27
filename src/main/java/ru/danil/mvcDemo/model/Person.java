@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 public class Person {
-    private int person_id;
+    private Integer person_id;
 
     @NotEmpty
     @Size(min = 10, max = 60, message = "Ваше фио должно содержать от 2х до 30 символов")
@@ -21,7 +21,7 @@ public class Person {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date_of_birth;
 
-    public Person(int person_id, String FIO, LocalDate date_of_birth) {
+    public Person(Integer person_id, String FIO, LocalDate date_of_birth) {
         this.person_id = person_id;
         this.FIO = FIO;
         this.date_of_birth = date_of_birth;
@@ -29,11 +29,11 @@ public class Person {
 
     public Person() {}
 
-    public int getPerson_id() {
+    public Integer getPerson_id() {
         return person_id;
     }
 
-    public void setPerson_id(int person_id) {
+    public void setPerson_id(Integer person_id) {
         this.person_id = person_id;
     }
 
