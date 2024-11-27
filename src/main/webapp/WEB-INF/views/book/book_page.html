@@ -9,10 +9,10 @@
 <p th:text="${book.getAuthor()}"></p>
 <p th:text="${book.getDate_of_release()}"></p>
 
-<!--<a th:href="@{/people/{id}/edit(id=${person.getPerson_id()})}">Обновить</a>-->
+<a th:href="@{/books/{id}/edit(id=${book.getBook_id()})}">Обновить</a>
+<form th:method="DELETE" th:action="@{/books/{id}(id=${book.getBook_id()})}">
+    <input type="submit" th:value="Удалить">
+</form>
 
-<!--<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPerson_id()})}">-->
-<!--    <input type="submit" th:value="Удалить">-->
-<!--</form>-->
 </body>
 </html>
