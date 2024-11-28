@@ -2,19 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit</title>
+    <title>Edit Person</title>
+    <link rel="stylesheet" href="/resources/styles/edit_person.css">
 </head>
 <body>
+<div class="form__container">
+    <h1>Обновить читателя</h1>
     <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getPerson_id()})}" th:object="${person}">
-        <div>
-            <label for="fio">Имя: </label>
-            <input type="text" th:field="*{FIO}" id="fio">
-
-            <label for="fio">Дата рождения: </label>
-            <input type="text" th:field="*{date_of_birth}" id="date_of_birth">
-
-            <input type="submit" value="Изменить">
+        <div class="form__group">
+            <label for="fio">Имя:</label>
+            <input type="text" th:field="*{FIO}" id="fio" placeholder="Введите имя" required>
+        </div>
+        <div class="form__group">
+            <label for="date_of_birth">Дата рождения:</label>
+            <input type="text" th:field="*{date_of_birth}" id="date_of_birth" placeholder="Введите дату рождения (ГГГГ-ММ-ДД)" required>
+        </div>
+        <div class="form__actions">
+            <input class="btn save" type="submit" value="Изменить">
         </div>
     </form>
+</div>
 </body>
 </html>

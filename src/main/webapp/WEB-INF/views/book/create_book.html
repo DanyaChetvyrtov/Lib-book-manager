@@ -2,20 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create new book</title>
+    <link rel="stylesheet" href="/resources/styles/create_person.css">
 </head>
 <body>
-    <form th:method="POST" th:action="@{/books}" th:object="${book}">
-        <label for="title">Название: </label>
-        <input id="title" type="text" th:field="*{title}">
 
-        <label for="author">Автор: </label>
-        <input id="author" type="text" th:field="*{author}">
-
-        <label for="date_of_release">Дата публикации: </label>
-        <input id="date_of_release" type="text" th:field="*{date_of_release}">
-
-        <input type="submit" value="Создать">
-    </form>
+    <div class="form__container">
+        <h1>Добавить книгу</h1>
+        <form th:method="POST" th:action="@{/books}" th:object="${book}">
+            <div class="form__group">
+                <label for="title">Название: </label>
+                <input id="title" type="text" th:field="*{title}" placeholder="Введите название книги">
+<!--                <div class="error-message" th:if="${#fields.hasErrors('FIO')}" th:errors="*{FIO}"></div>-->
+            </div>
+            <div class="form__group">
+                <label for="author">Автор: </label>
+                <input id="author" type="text" th:field="*{author}" placeholder="Введите автора">
+<!--                <div class="error-message" th:if="${#fields.hasErrors('date_of_birth')}" th:errors="*{date_of_birth}"></div>-->
+            </div>
+            <div class="form__group">
+                <label for="date_of_release">Дата публикации: </label>
+                <input id="date_of_release" type="text" th:field="*{date_of_release}" placeholder="Введите дату публикации">
+            </div>
+            <div class="form__actions">
+                <input class="btn submit" type="submit" value="Создать">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

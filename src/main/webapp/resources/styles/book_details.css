@@ -1,0 +1,164 @@
+/* Сброс базовых стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Общий фон */
+body {
+    background: linear-gradient(135deg, #eef2f3, #dfe4e8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Контейнер */
+.details__container {
+    width: 50%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+/* Заголовок */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Информация о книге */
+.details__info{
+    border-bottom: 1px solid rgb(0, 0, 0, 0.3);
+}
+
+.details__info p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.details__info strong {
+    color: #555;
+}
+
+/* Читатель */
+.details__reader {
+    margin: 20px 0;
+    padding: 10px;
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.details__reader p {
+    font-size: 16px;
+    color: #444;
+}
+
+/* Действия */
+.details__actions,
+.form__assign {
+    margin-top: 10px;
+    width: 45%;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Кнопка обновления */
+.btn.edit {
+    width: 100%;
+    background-color: #007bff;
+    display: block;
+    text-align: center;
+}
+
+.btn.edit:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Кнопка назначения читателя */
+.btn.assign {
+    margin-top: 25px;
+    width: 45%;
+    background-color: #28a745;
+}
+
+.btn.assign:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.delete__update__container{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Кнопка удаления */
+.btn.delete {
+    background-color: #dc3545;
+    margin-top: 10px;
+    width: 45%;
+    display: block;
+    text-align: center;
+}
+
+.btn.delete:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* Поле выбора читателя */
+label {
+    font-size: 16px;
+    color: #555;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: #007bff;
+}
+
+/* Форма назначения */
+.form__assign {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form__assign div{
+    width: 45%;
+}
+
+/* Общий стиль для форм */
+form {
+    margin-top: 20px;
+}
+

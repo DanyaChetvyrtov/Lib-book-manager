@@ -1,0 +1,86 @@
+/* Сброс базовых стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Общий фон */
+body {
+    background: linear-gradient(135deg, #f0f0f0, #d6d6d6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Контейнер формы */
+.form__container {
+    width: 40%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+/* Заголовок */
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Группа ввода */
+.form__group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__group label {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 8px;
+}
+
+.form__group input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form__group input:focus {
+    border-color: #007bff;
+}
+
+/* Действия формы */
+.form__actions {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn.save {
+    background-color: #28a745;
+}
+
+.btn.save:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
