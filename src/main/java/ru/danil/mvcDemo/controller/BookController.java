@@ -5,17 +5,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.danil.mvcDemo.DAO.BookDAO;
+import ru.danil.mvcDemo.DAO.PersonDAO;
 import ru.danil.mvcDemo.model.Book;
 
 @Controller
 @RequestMapping("/books")
 public class BookController {
     private final BookDAO bookDAO;
-    private final JdbcTemplate jdbcTemplate;
+    private final PersonDAO personDAO;
 
-    public BookController(BookDAO bookDAO, JdbcTemplate jdbcTemplate) {
+    public BookController(BookDAO bookDAO, PersonDAO personDAO) {
         this.bookDAO = bookDAO;
-        this.jdbcTemplate = jdbcTemplate;
+        this.personDAO = personDAO;
     }
 
     @GetMapping
@@ -26,7 +27,14 @@ public class BookController {
 
     @GetMapping("/{id}")
     public String getBook(@PathVariable("id") int id, Model model){
-        model.addAttribute("book", bookDAO.getBookById(id));
+        Book book = bookDAO.getBookById(id);
+        model.addAttribute("book", book);
+
+        if(book.getPerson_id() == null)
+            model.addAttribute("people", personDAO.getPeople());
+        else
+            model.addAttribute("person", personDAO.getPersonById(book.getPerson_id()));
+
         return "book/book_page";
     }
 

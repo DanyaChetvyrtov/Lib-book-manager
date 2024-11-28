@@ -2,16 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Person Details</title>
+    <link rel="stylesheet" href="/resources/styles/model_page.css">
 </head>
 <body>
-    <p th:text="${person.getFIO()}"></p>
-    <p th:text="${person.getDate_of_birth()}"></p>
+<div class="details__container">
+    <h1>Person Details</h1>
+    <div class="details__content">
+        <div class="person-info">
+            <p><strong>Name:</strong> <span th:text="${person.getFIO()}"></span></p>
+            <p><strong>Birth Date:</strong> <span th:text="${person.getDate_of_birth()}"></span></p>
+        </div>
+        <div class="actions">
+            <a class="btn edit" th:href="@{/people/{id}/edit(id=${person.getPerson_id()})}">Update</a>
+            <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPerson_id()})}">
+                <input class="btn delete" type="submit" th:value="Delete">
+            </form>
+        </div>
+    </div>
 
-    <a th:href="@{/people/{id}/edit(id=${person.getPerson_id()})}">Обновить</a>
-
-    <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPerson_id()})}">
-        <input type="submit" th:value="Удалить">
-    </form>
+    <h2>Books</h2>
+    <div class="books__list">
+        <p th:each="book : ${books}" th:text="${book.getTitle()}"></p>
+    </div>
+</div>
 </body>
 </html>

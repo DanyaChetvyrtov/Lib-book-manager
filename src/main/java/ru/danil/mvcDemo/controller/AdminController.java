@@ -1,0 +1,29 @@
+package ru.danil.mvcDemo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ru.danil.mvcDemo.DAO.PersonBookDAO;
+
+
+// Контроллер для взаимодействия моделей person и
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+    private final PersonBookDAO personBookDAO;
+
+    public AdminController(PersonBookDAO personBookDAO) {
+        this.personBookDAO = personBookDAO;
+    }
+
+    @PatchMapping("/give_book")
+    public String giveBook(
+            @RequestParam("book_id") int book_id,
+            @RequestParam("person_id") int person_id
+    ){
+        personBookDAO.assignBookToPerson(person_id, book_id);
+
+        return "redirect: /books";
+    }
+}

@@ -1,0 +1,110 @@
+/* Сброс базовых стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Общий фон */
+body {
+    background: linear-gradient(135deg, #f0f0f0, #d6d6d6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Контейнер деталей */
+.details__container {
+    width: 60%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* Заголовок */
+h1, h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Контент */
+.details__content {
+    margin-bottom: 20px;
+}
+
+.person-info {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.person-info p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.person-info strong {
+    color: #000;
+}
+
+/* Действия */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn.edit {
+    background-color: #007bff;
+}
+
+.btn.edit:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.btn.delete {
+    background-color: #dc3545;
+    border: none;
+}
+
+.btn.delete:hover {
+    background-color: #a71d2a;
+    transform: scale(1.05);
+}
+
+/* Список книг */
+.books__list {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.books__list p {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 5px;
+}

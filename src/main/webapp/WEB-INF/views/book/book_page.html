@@ -10,6 +10,24 @@
 <p th:text="${book.getDate_of_release()}"></p>
 
 <a th:href="@{/books/{id}/edit(id=${book.getBook_id()})}">Обновить</a>
+
+<p th:if="${book.getPerson_id()}" th:text="${person.getFIO()}"></p>
+
+<form th:method="PATCH" th:action="@{/admin/give_book}" th:if="${people}">
+    <label for="people">Выбери читателя: </label>
+    <select id="people" name="person_id">
+        <option
+                th:each="person : ${people}"
+                th:value="${person.getPerson_id()}"
+                th:text="${person.getFIO()}"
+        ></option>
+    </select>
+
+    <input type="hidden" name="book_id" th:value="${book.getBook_id()}">
+
+    <input type="submit" value="Назначить">
+</form>
+
 <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getBook_id()})}">
     <input type="submit" th:value="Удалить">
 </form>
