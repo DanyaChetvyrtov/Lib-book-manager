@@ -9,7 +9,6 @@ import ru.danil.mvcDemo.DAO.PersonBookDAO;
 import ru.danil.mvcDemo.DAO.PersonDAO;
 import ru.danil.mvcDemo.model.Person;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/people")
@@ -50,19 +49,35 @@ public class PersonController {
             return "person/create_person";
 
         personDAO.addPerson(person);
-        return "redirect: /people";
+        return "redirect:/people";
     }
 
 
     @GetMapping("/{id}/edit")
     public String editPerson(@PathVariable("id") int id, Model model){
         model.addAttribute("person", personDAO.getPersonById(id));
+        model.addAttribute("cur_person_id", id);
 
         return "person/edit_person";
     }
 
     @PatchMapping("/{id}")
-    public String editPerson(@PathVariable("id") int id, @ModelAttribute("person") Person person){
+    public String editPerson(
+            @PathVariable("id") int id,
+            @ModelAttribute("person") @Valid Person person,
+            BindingResult bindingResult,
+            Model model
+    ){
+        /**
+            Смею предположить, что это достаточно костыльный способ решения
+            однако это работает, и, пока что, я не знаю, как сделать лучше
+            :\
+        */
+        if (bindingResult.hasErrors()){
+            model.addAttribute("cur_person_id", id);
+            return "person/edit_person";
+        }
+
         personDAO.updatePerson(id, person);
         return "person/person_profile";
     }

@@ -1,8 +1,10 @@
 package ru.danil.mvcDemo.controller;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.danil.mvcDemo.DAO.BookDAO;
 import ru.danil.mvcDemo.DAO.PersonDAO;
@@ -30,6 +32,7 @@ public class BookController {
         Book book = bookDAO.getBookById(id);
         model.addAttribute("book", book);
 
+        // Проверка была ли назначина за кем-то книга
         if(book.getPerson_id() == null)
             model.addAttribute("people", personDAO.getPeople());
         else
@@ -46,8 +49,12 @@ public class BookController {
 
     @PostMapping
     public String createNewBook(
-            @ModelAttribute("book") Book book
+            @ModelAttribute("book") @Valid Book book,
+            BindingResult bindingResult
     ){
+        if(bindingResult.hasErrors())
+            return "book/create_book";
+
         bookDAO.addBook(book);
         return "redirect: /books";
     }
@@ -55,13 +62,24 @@ public class BookController {
     @GetMapping("/{id}/edit")
     public String editBook(@PathVariable("id") int id, Model model){
         model.addAttribute("book", bookDAO.getBookById(id));
+        model.addAttribute("cur_book_id", id);
         return "book/edit_book";
     }
 
     @PatchMapping("/{id}")
-    public String updateBook(@ModelAttribute("book") Book book, @PathVariable("id") int id){
+    public String updateBook(
+            @PathVariable("id") int id,
+            @ModelAttribute("book") @Valid Book book,
+            BindingResult bindingResult,
+            Model model
+    ){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("cur_book_id", id);
+            return "book/edit_book";
+        }
+
         bookDAO.update(id, book);
-        return "redirect: /books";
+        return "book/book_page";
     }
 
     @DeleteMapping("/{id}")

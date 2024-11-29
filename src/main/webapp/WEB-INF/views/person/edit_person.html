@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Edit</title>
 </head>
 <body>
-    <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getPerson_id()})}" th:object="${person}">
+    <form th:method="PATCH" th:action="@{/people/{id}(id=${cur_person_id})}" th:object="${person}">
         <div>
             <label for="fio">Имя: </label>
             <input type="text" th:field="*{FIO}" id="fio">
+            <div th:if="${#fields.hasErrors('FIO')}" th:errors="*{FIO}" style="color: red"></div>
 
             <label for="fio">Дата рождения: </label>
             <input type="text" th:field="*{date_of_birth}" id="date_of_birth">
+            <div th:if="${#fields.hasErrors('date_of_birth')}" th:errors="*{date_of_birth}" style="color: red"></div>
 
             <input type="submit" value="Изменить">
         </div>
