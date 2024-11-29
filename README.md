@@ -22,8 +22,7 @@
 
 ## Список всех доступных книг
 
-<img src="https://drive.google.com/uc?export=view&id=1xY5RLm4I6uksD8iGzBSqjG-P--4SdpKj" width="412px"/>
-
+![](https://drive.google.com/uc?export=view&id=1xY5RLm4I6uksD8iGzBSqjG-P--4SdpKj)
 
 ## Взаимодействие с книгой
 В приложении есть возможность закрепить книгу за определённым читателем. 
@@ -41,4 +40,4 @@
 
 ### Отображение закреплённых за читателем книг
 
-<img src="https://drive.google.com/uc?export=view&id=1xcWwwnhmyVw-GpVetX9CREuP7By_slT-" width="412px">
+![](https://drive.google.com/uc?export=view&id=1xcWwwnhmyVw-GpVetX9CREuP7By_slT-)
