@@ -29,4 +29,11 @@ public class PersonBookDAO {
                 new BeanPropertyRowMapper<>(Book.class)
         );
     }
+
+    public void takeBackFromPerson(int book_id) {
+        jdbcTemplate.update(
+                "UPDATE book SET person_id = ? WHERE book_id = ?;",
+                null, book_id
+        );
+    }
 }
