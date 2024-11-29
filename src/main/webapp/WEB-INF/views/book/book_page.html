@@ -7,23 +7,23 @@
 </head>
 <body>
 <div class="details__container">
-    <h1>Book Details</h1>
+    <h1>Информация о книге</h1>
     <div class="details__info">
-        <p><strong>Title:</strong> <span th:text="${book.getTitle()}"></span></p>
-        <p><strong>Author:</strong> <span th:text="${book.getAuthor()}"></span></p>
-        <p><strong>Release Date:</strong> <span th:text="${book.getDate_of_release()}"></span></p>
+        <p><strong>Название:</strong> <span th:text="${book.getTitle()}"></span></p>
+        <p><strong>Автор:</strong> <span th:text="${book.getAuthor()}"></span></p>
+        <p><strong>Дата публикации:</strong> <span th:text="${book.getDate_of_release()}"></span></p>
     </div>
 
-    <div th:if="${book.getPerson_id()}" class="details__reader">
+
+<div th:if="${book.getPerson_id()}">
+    <div class="details__reader">
         <p><strong>Reader:</strong> <span th:text="${person.getFIO()}"></span></p>
     </div>
 
-<div th:if="${book.getPerson_id()}">
-    <p th:text="${person.getFIO()}"></p>
     <form th:method="PATCH" th:action="@{/admin/take_back}" th:object="${book}">
         <input type="hidden" name="book_id" th:value="${book.getBook_id()}">
 
-        <input type="submit" value="Освободить">
+        <input class="btn reassign" type="submit" value="Освободить">
     </form>
 </div>
 

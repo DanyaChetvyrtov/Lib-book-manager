@@ -7,13 +7,13 @@
 </head>
 <body>
 <div class="list__container">
-    <h1>All Books</h1>
+    <h1>Книги</h1>
     <div class="list__content">
         <a class="card" th:href="@{/books/{id}(id=${book.getBook_id()})}" th:each="book : ${books}">
             <div class="card__info">
                 <p><strong>ID:</strong> <span th:text="${book.getBook_id()}"></span></p>
-                <p><strong>Title:</strong> <span th:text="${book.getTitle()}"></span></p>
-                <p><strong>Author:</strong> <span th:text="${book.getAuthor()}"></span></p>
+                <p><strong>Название:</strong> <span th:text="${book.getTitle()}"></span></p>
+                <p><strong>Автор:</strong> <span th:text="${book.getAuthor()}"></span></p>
             </div>
         </a>
     </div>
