@@ -12,7 +12,7 @@ public class Person {
     private Integer person_id;
 
     @NotEmpty
-    @Size(min = 10, max = 60, message = "Ваше фио должно содержать от 2х до 30 символов")
+    @Size(min = 10, max = 60, message = "Ваше фио должно содержать от 10 до 60 символов")
     @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
             message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)")
     private String FIO;

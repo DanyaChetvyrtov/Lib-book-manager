@@ -18,20 +18,30 @@
         <p><strong>Reader:</strong> <span th:text="${person.getFIO()}"></span></p>
     </div>
 
-    <form class="form__assign" th:method="PATCH" th:action="@{/admin/give_book}" th:if="${people}">
-        <div>
-            <label for="people">Выдать читателю:</label>
-            <select id="people" name="person_id">
-                <option
-                        th:each="person : ${people}"
-                        th:value="${person.getPerson_id()}"
-                        th:text="${person.getFIO()}"
-                ></option>
-            </select>
-        </div>
+<div th:if="${book.getPerson_id()}">
+    <p th:text="${person.getFIO()}"></p>
+    <form th:method="PATCH" th:action="@{/admin/take_back}" th:object="${book}">
         <input type="hidden" name="book_id" th:value="${book.getBook_id()}">
-        <input class="btn assign" type="submit" value="Выдать">
+
+        <input type="submit" value="Освободить">
     </form>
+</div>
+
+<form class="form__assign" th:method="PATCH" th:action="@{/admin/give_book}" th:if="${people}">
+    <div>
+        <label for="people">Выбери читателя: </label>
+        <select id="people" name="person_id">
+            <option
+                    th:each="person : ${people}"
+                    th:value="${person.getPerson_id()}"
+                    th:text="${person.getFIO()}"
+            ></option>
+        </select>
+    </div>
+
+    <input type="hidden" name="book_id" th:value="${book.getBook_id()}">
+    <input class="btn assign" type="submit" value="Выдать">
+</form>
 
     <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getBook_id()})}">
         <div class="delete__update__container">

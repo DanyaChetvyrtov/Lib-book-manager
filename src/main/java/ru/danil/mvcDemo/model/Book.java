@@ -1,12 +1,27 @@
 package ru.danil.mvcDemo.model;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Book {
     private Integer book_id;
     private Integer person_id;
+
+    @NotEmpty
+    @Size(min = 2, max = 60, message = "Название может содержать от 2х до 60 символов")
     private String title;
+
+    @NotEmpty
+    @Size(min = 10, max = 60, message = "Имя автора должно содержать от 10 до 60 символов")
     private String author;
+
+    @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate date_of_release;
 
     public Book(Integer book_id, Integer person_id, String title, String author, LocalDate date_of_release) {
