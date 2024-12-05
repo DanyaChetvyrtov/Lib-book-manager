@@ -1,64 +1,130 @@
 package ru.danil.mvcDemo.model;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "person")
 public class Person {
-    private Integer person_id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
+    @Column(name = "full_name")
     @NotEmpty
-    @Size(min = 10, max = 60, message = "Ваше фио должно содержать от 10 до 60 символов")
+    @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов")
     @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
             message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)")
-    private String FIO;
+    private String full_name;
 
-    @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate date_of_birth;
+    @Column(name = "age")
+    @Max(value = 99, message = "Возраст не может быть больше 99")
+    @Min(value = 11, message = "Возраст не может быть меньше 11")
+    private int age;
 
-    public Person(Integer person_id, String FIO, LocalDate date_of_birth) {
-        this.person_id = person_id;
-        this.FIO = FIO;
-        this.date_of_birth = date_of_birth;
+    @Column(name = "email")
+    @Email
+    @NotEmpty
+    @Size(max = 100, message = "Email не может содержать более 100 симовлов")
+    private String email;
+
+    @Column(name = "phone_number")
+    @NotEmpty
+    @Size(max = 20, message = "Email не может содержать более 20 симовлов")
+    private String phoneNumber;
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @OneToMany(mappedBy = "curBookOwner")
+    private List<Book> reservedBook;
+
+
+    public Person() {
     }
 
-    public Person() {}
-
-    public Integer getPerson_id() {
-        return person_id;
+    public Person(Integer id, String full_name, int age, String email, String phoneNumber, Date createdAt, List<Book> reservedBook) {
+        this.id = id;
+        this.full_name = full_name;
+        this.age = age;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.createdAt = createdAt;
+        this.reservedBook = reservedBook;
     }
 
-    public void setPerson_id(Integer person_id) {
-        this.person_id = person_id;
+    public Integer getId() {
+        return id;
     }
 
-    public String getFIO() {
-        return FIO;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setFIO(String FIO) {
-        this.FIO = FIO;
+    public @NotEmpty @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов") @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
+            message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)") String getFull_name() {
+        return full_name;
     }
 
-    public LocalDate getDate_of_birth() {
-        return date_of_birth;
+    public void setFull_name(@NotEmpty @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов") @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
+            message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)") String full_name) {
+        this.full_name = full_name;
     }
 
-    public void setDate_of_birth(LocalDate date_of_birth) {
-        this.date_of_birth = date_of_birth;
+    @Max(value = 99, message = "Возраст не может быть больше 99")
+    @Min(value = 11, message = "Возраст не может быть меньше 11")
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(@Max(value = 99, message = "Возраст не может быть больше 99") @Min(value = 11, message = "Возраст не может быть меньше 11") int age) {
+        this.age = age;
+    }
+
+    public @Email @NotEmpty @Size(max = 100, message = "Email не может содержать более 100 симовлов") String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@Email @NotEmpty @Size(max = 100, message = "Email не может содержать более 100 симовлов") String email) {
+        this.email = email;
+    }
+
+    public @NotEmpty @Size(max = 20, message = "Email не может содержать более 20 симовлов") String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(@NotEmpty @Size(max = 20, message = "Email не может содержать более 20 симовлов") String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public List<Book> getReservedBook() {
+        return reservedBook;
+    }
+
+    public void setReservedBook(List<Book> reservedBook) {
+        this.reservedBook = reservedBook;
     }
 
     @Override
     public String toString() {
         return "Person{" +
-                "person_id=" + person_id +
-                ", FIO='" + FIO + '\'' +
-                ", date_of_birth=" + date_of_birth +
+                "id=" + id +
+                ", full_name='" + full_name + '\'' +
                 '}';
     }
 }

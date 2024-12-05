@@ -1,76 +1,135 @@
 package ru.danil.mvcDemo.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.util.Date;
 
+@Entity
+@Table(name = "book")
 public class Book {
-    private Integer book_id;
-    private Integer person_id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
+    @Column(name = "title")
     @NotEmpty
-    @Size(min = 2, max = 60, message = "Название может содержать от 2х до 60 символов")
+    @Size(min = 2, max = 100, message = "Название может содержать от 2х до 100 символов")
     private String title;
 
-    @NotEmpty
-    @Size(min = 10, max = 60, message = "Имя автора должно содержать от 10 до 60 символов")
-    private String author;
+    @Column(name = "description")
+    private String description;
 
-    @NotNull
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate date_of_release;
 
-    public Book(Integer book_id, Integer person_id, String title, String author, LocalDate date_of_release) {
-        this.book_id = book_id;
-        this.person_id = person_id;
+    @Column(name = "release_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy") // дд/мм/гггг
+    private Date releaseDate;
+
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    private Author bookAuthor;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person curBookOwner;
+
+    @OneToOne(mappedBy = "book")
+    private BookStatus bookStatus;
+
+    public Book() {
+    }
+
+    public Book(Integer id, String title, String description, Date releaseDate, Date createdAt, Author bookAuthor, Person curBookOwner, BookStatus bookStatus) {
+        this.id = id;
         this.title = title;
-        this.author = author;
-        this.date_of_release = date_of_release;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.createdAt = createdAt;
+        this.bookAuthor = bookAuthor;
+        this.curBookOwner = curBookOwner;
+        this.bookStatus = bookStatus;
     }
 
-    public Book() {}
-
-    public Integer getBook_id() {
-        return book_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setBook_id(Integer book_id) {
-        this.book_id = book_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Integer getPerson_id() {
-        return person_id;
-    }
-
-    public void setPerson_id(Integer person_id) {
-        this.person_id = person_id;
-    }
-
-    public String getTitle() {
+    public @NotEmpty @Size(min = 2, max = 100, message = "Название может содержать от 2х до 100 символов") String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@NotEmpty @Size(min = 2, max = 100, message = "Название может содержать от 2х до 100 символов") String title) {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public LocalDate getDate_of_release() {
-        return date_of_release;
+    public Date getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setDate_of_release(LocalDate date_of_release) {
-        this.date_of_release = date_of_release;
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Author getBookAuthor() {
+        return bookAuthor;
+    }
+
+    public void setBookAuthor(Author bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
+
+    public Person getCurBookOwner() {
+        return curBookOwner;
+    }
+
+    public void setCurBookOwner(Person curBookOwner) {
+        this.curBookOwner = curBookOwner;
+    }
+
+    public BookStatus getBookStatus() {
+        return bookStatus;
+    }
+
+    public void setBookStatus(BookStatus bookStatus) {
+        this.bookStatus = bookStatus;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", id=" + id +
+                '}';
     }
 }
