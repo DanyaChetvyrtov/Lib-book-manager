@@ -9,11 +9,11 @@
 <div class="list__container">
     <h1>Читатели</h1>
     <div class="list__content">
-        <a class="card" th:href="@{/people/{id}(id=${person.getPerson_id()})}" th:each="person : ${people}">
+        <a class="card" th:href="@{/people/{id}(id=${person.getId()})}" th:each="person : ${people}">
             <div class="card__info">
-                <p><strong>ID:</strong> <span th:text="${person.getPerson_id()}"></span></p>
-                <p><strong>ФИО:</strong> <span th:text="${person.getFIO()}"></span></p>
-                <p><strong>Дата рождения:</strong> <span th:text="${person.getDate_of_birth()}"></span></p>
+                <p><strong>ID:</strong> <span th:text="${person.getId()}"></span></p>
+                <p><strong>ФИО:</strong> <span th:text="${person.getFull_name()}"></span></p>
+                <p><strong>Дата рождения:</strong> <span th:text="${person.getAge()}"></span></p>
             </div>
         </a>
     </div>

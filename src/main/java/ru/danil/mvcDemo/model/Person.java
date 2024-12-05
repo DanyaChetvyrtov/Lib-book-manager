@@ -26,7 +26,7 @@ public class Person {
     @Column(name = "age")
     @Max(value = 99, message = "Возраст не может быть больше 99")
     @Min(value = 11, message = "Возраст не может быть меньше 11")
-    private int age;
+    private Integer age;
 
     @Column(name = "email")
     @Email
@@ -44,20 +44,20 @@ public class Person {
     private Date createdAt;
 
     @OneToMany(mappedBy = "curBookOwner")
-    private List<Book> reservedBook;
+    private List<Book> reservedBooks;
 
 
     public Person() {
     }
 
-    public Person(Integer id, String full_name, int age, String email, String phoneNumber, Date createdAt, List<Book> reservedBook) {
+    public Person(Integer id, String full_name, Integer age, String email, String phoneNumber, Date createdAt, List<Book> reservedBooks) {
         this.id = id;
         this.full_name = full_name;
         this.age = age;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.createdAt = createdAt;
-        this.reservedBook = reservedBook;
+        this.reservedBooks = reservedBooks;
     }
 
     public Integer getId() {
@@ -80,11 +80,11 @@ public class Person {
 
     @Max(value = 99, message = "Возраст не может быть больше 99")
     @Min(value = 11, message = "Возраст не может быть меньше 11")
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(@Max(value = 99, message = "Возраст не может быть больше 99") @Min(value = 11, message = "Возраст не может быть меньше 11") int age) {
+    public void setAge(@Max(value = 99, message = "Возраст не может быть больше 99") @Min(value = 11, message = "Возраст не может быть меньше 11") Integer age) {
         this.age = age;
     }
 
@@ -113,11 +113,11 @@ public class Person {
     }
 
     public List<Book> getReservedBook() {
-        return reservedBook;
+        return reservedBooks;
     }
 
-    public void setReservedBook(List<Book> reservedBook) {
-        this.reservedBook = reservedBook;
+    public void setReservedBook(List<Book> reservedBooks) {
+        this.reservedBooks = reservedBooks;
     }
 
     @Override
