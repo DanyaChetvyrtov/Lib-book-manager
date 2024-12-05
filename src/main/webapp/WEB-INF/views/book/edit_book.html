@@ -8,7 +8,7 @@
 <body>
 <div class="form__container">
     <h1>Обновить информацию</h1>
-    <form th:method="PATCH" th:action="@{/books/{id}(id=${cur_book_id})}" th:object="${book}">
+    <form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
         <div class="form__group">
             <label for="title">Название: </label>
             <input id="title" type="text" th:field="*{title}">
@@ -17,14 +17,25 @@
 
         <div class="form__group">
             <label for="author">Автор: </label>
-            <input id="author" type="text" th:field="*{author}">
-            <div th:if="${#fields.hasErrors('author')}" th:errors="*{author}" style="color: red"></div>
+            <select id="author" name="author_id">
+                <option
+                        th:each="author : ${authors}"
+                        th:value="${author.getId()}"
+                        th:text="${author.getFullName()}"
+                ></option>
+            </select>
         </div>
 
         <div class="form__group">
-            <label for="date_of_release">Дата публикации: </label>
-            <input id="date_of_release" type="text" th:field="*{date_of_release}">
-            <div th:if="${#fields.hasErrors('date_of_release')}" th:errors="*{date_of_release}" style="color: red"></div>
+            <label for="releaseDate">Дата публикации: </label>
+            <input id="releaseDate" type="text" th:field="*{releaseDate}">
+            <div th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}" style="color: red"></div>
+        </div>
+
+        <div class="form__group">
+            <label for="description">Дата публикации: </label>
+            <input id="description" type="text" th:field="*{description}">
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color: red"></div>
         </div>
 
         <div class="form__actions">

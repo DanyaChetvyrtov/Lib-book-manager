@@ -46,6 +46,9 @@ public class Book {
     @OneToOne(mappedBy = "book")
     private BookStatus bookStatus;
 
+    @Transient
+    private Integer author_id;
+
     public Book() {
     }
 
@@ -124,6 +127,14 @@ public class Book {
         this.bookStatus = bookStatus;
     }
 
+
+    public Integer getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(Integer author_id) {
+        this.author_id = author_id;
+    }
 
     @Override
     public String toString() {

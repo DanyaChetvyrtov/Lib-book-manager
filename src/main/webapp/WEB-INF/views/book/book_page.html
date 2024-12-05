@@ -6,47 +6,49 @@
     <link rel="stylesheet" href="/resources/styles/book_details.css">
 </head>
 <body>
-<div class="details__container">
-    <h1>Информация о книге</h1>
-    <div class="details__info">
-        <p><strong>Название:</strong> <span th:text="${book.getTitle()}"></span></p>
-        <p><strong>Автор:</strong> <span th:text="${book.getAuthor()}"></span></p>
-        <p><strong>Дата публикации:</strong> <span th:text="${book.getDate_of_release()}"></span></p>
+    <div class="details__container">
+        <h1>Информация о книге</h1>
+        <div class="details__info">
+            <p><strong>Название:</strong> <span th:text="${book.getTitle()}"></span></p>
+            <p><strong>Автор:</strong> <span th:text="${book.getBookAuthor().getFullName()}"></span></p>
+            <p><strong>Дата публикации:</strong> <span th:text="${book.getReleaseDate()}"></span></p>
+            <p><strong>Описание:</strong> <span th:text="${book.getDescription()}"></span></p>
+        </div>
+
+
+    <div th:if="${owner}">
+        <div class="details__reader">
+            <p><strong>Reader:</strong> <span th:text="${owner.getFull_name()}"></span></p>
+        </div>
+
+        <form th:method="PATCH" th:action="@{/admin/take_back}" th:object="${book}">
+            <input type="hidden" name="book_id" th:value="${book.getId()}">
+
+            <input class="btn reassign" type="submit" value="Освободить">
+        </form>
+    </div>
+    <div th:if="${people}">
+        <form class="form__assign" th:method="PATCH" th:action="@{/admin/give_book}">
+            <div>
+                <label for="person">Читатели: </label>
+                <select id="person" name="person_id">
+                    <option
+                            th:each="person : ${people}"
+                            th:value="${person.getId()}"
+                            th:text="${person.getFull_name()}"
+                    ></option>
+                </select>
+            </div>
+
+            <input type="hidden" name="book_id" th:value="${book.getId()}">
+            <input class="btn assign" type="submit" value="Выдать">
+        </form>
     </div>
 
-
-<div th:if="${book.getPerson_id()}">
-    <div class="details__reader">
-        <p><strong>Reader:</strong> <span th:text="${person.getFIO()}"></span></p>
-    </div>
-
-    <form th:method="PATCH" th:action="@{/admin/take_back}" th:object="${book}">
-        <input type="hidden" name="book_id" th:value="${book.getBook_id()}">
-
-        <input class="btn reassign" type="submit" value="Освободить">
-    </form>
-</div>
-
-<form class="form__assign" th:method="PATCH" th:action="@{/admin/give_book}" th:if="${people}">
-    <div>
-        <label for="people">Выбери читателя: </label>
-        <select id="people" name="person_id">
-            <option
-                    th:each="person : ${people}"
-                    th:value="${person.getPerson_id()}"
-                    th:text="${person.getFIO()}"
-            ></option>
-        </select>
-    </div>
-
-    <input type="hidden" name="book_id" th:value="${book.getBook_id()}">
-    <input class="btn assign" type="submit" value="Выдать">
-</form>
-
-    <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getBook_id()})}">
+    <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
         <div class="delete__update__container">
             <div class="details__actions">
-                <a class="btn edit" th:href="@{/books/{id}/edit(id=${book.getBook_id()})}">Обновить</a>
+                <a class="btn edit" th:href="@{/books/{id}/edit(id=${book.getId()})}">Обновить</a>
             </div>
 
             <input class="btn delete" type="submit" value="Удалить">
