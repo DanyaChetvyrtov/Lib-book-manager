@@ -16,7 +16,12 @@
     <div class="list__content">
         <a class="card" th:href="@{/books/{id}(id=${book.getId()})}" th:each="book : ${books}">
             <div class="card__info">
-                <p><strong>ID:</strong> <span th:text="${book.getId()}"></span></p>
+                <p th:switch="${book.getBookStatus().getCurrentStatus().toString()}"><strong>
+                    <span th:case="AVAILABLE" style="color: #28a745">Доступна</span>
+                    <span th:case="RESERVED" style="color: #dc3545">Занята</span>
+                    <span th:case="TEMPORARILY_UNAVAILABLE" style="color: #5a6268">Временно недоступна</span>
+                    <span th:case="*">Что-то не то</span>
+                </strong></p>
                 <p><strong>Название:</strong> <span th:text="${book.getTitle()}"></span></p>
                 <p><strong>Автор:</strong> <span th:text="${book.getBookAuthor().getFullName()}"></span></p>
             </div>

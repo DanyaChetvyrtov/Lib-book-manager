@@ -24,12 +24,15 @@ public class PersonService {
     }
 
     public Person findById(int id) {
-        return personRepository.findById(id).orElse(null);
+        return personRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Person not found")
+        );
     }
 
     public List<Book> findAllBooksByPersonId(int id) {
-        Person person = personRepository.findById(id).orElse(null);
-        if (person == null) return null;
+        Person person = personRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Person not found")
+        );
 
         Hibernate.initialize(person.getReservedBook());
         return person.getReservedBook();

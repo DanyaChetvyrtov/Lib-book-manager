@@ -26,14 +26,13 @@
             <p><strong>Reader:</strong> <span th:text="${owner.getFull_name()}"></span></p>
         </div>
 
-        <form th:method="PATCH" th:action="@{/admin/take_back}" th:object="${book}">
+        <form th:method="PATCH" th:action="@{/books/{id}/return_book(id=${book.getId()})}">
             <input type="hidden" name="book_id" th:value="${book.getId()}">
-
-            <input class="btn reassign" type="submit" value="Освободить">
+            <input class="btn return_book" type="submit" value="Освободить">
         </form>
     </div>
     <div th:if="${people}">
-        <form class="form__assign" th:method="PATCH" th:action="@{/admin/give_book}">
+        <form class="form__assign" th:method="PATCH" th:action="@{/books/{id}/assign_book(id=${book.getId()})}">
             <div>
                 <label for="person">Читатели: </label>
                 <select id="person" name="person_id">

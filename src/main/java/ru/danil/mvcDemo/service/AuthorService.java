@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.danil.mvcDemo.model.Author;
 import ru.danil.mvcDemo.model.Book;
-import ru.danil.mvcDemo.model.Person;
 import ru.danil.mvcDemo.repository.AuthorsRepository;
 
 import java.util.Date;
@@ -25,15 +24,17 @@ public class AuthorService {
     }
 
     public Author findById(int id) {
-        return authorsRepository.findById(id).orElse(null);
+        return authorsRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Author not found")
+        );
     }
 
     public List<Book> findBooksById(int id) {
-        Author author = authorsRepository.findById(id).orElse(null);
-        if (author == null) return null;
+        Author author = authorsRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Author not found")
+        );
 
         Hibernate.initialize(author.getBooks());
-
         return author.getBooks();
     }
 

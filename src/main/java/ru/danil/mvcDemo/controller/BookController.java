@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.danil.mvcDemo.model.Book;
-import ru.danil.mvcDemo.model.Person;
 import ru.danil.mvcDemo.service.AuthorService;
 import ru.danil.mvcDemo.service.BookService;
 import ru.danil.mvcDemo.service.PersonService;
@@ -91,5 +90,25 @@ public class BookController {
     public String delete(@PathVariable("id") int id){
         bookService.deleteById(id);
         return "redirect:/books";
+    }
+
+    @PatchMapping("/{id}/assign_book")
+    public String assignBook(
+            @PathVariable("id") int id,
+            @RequestParam("person_id") int person_id
+    ){
+
+        bookService.assignBook(id, person_id);
+
+        return "redirect:/books/" + id;
+    }
+
+    @PatchMapping("/{id}/return_book")
+    public String returnBook(
+            @PathVariable("id") int id
+    ){
+        bookService.returnBook(id);
+
+        return "redirect:/books/" + id;
     }
 }
