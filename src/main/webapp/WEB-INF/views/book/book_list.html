@@ -7,6 +7,11 @@
 </head>
 <body>
 <div class="list__container">
+    <div class="home__link">
+        <a th:href="@{/home}" class="home__btn">
+            <span class="arrow">&larr;</span>
+        </a>
+    </div>
     <h1>Книги</h1>
     <div class="list__content">
         <a class="card" th:href="@{/books/{id}(id=${book.getId()})}" th:each="book : ${books}">

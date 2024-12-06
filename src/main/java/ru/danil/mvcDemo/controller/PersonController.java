@@ -7,8 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.danil.mvcDemo.model.Person;
 import ru.danil.mvcDemo.repository.AuthorsRepository;
-import ru.danil.mvcDemo.repository.BookRepository;
-import ru.danil.mvcDemo.repository.PersonRepository;
 import ru.danil.mvcDemo.service.BookService;
 import ru.danil.mvcDemo.service.PersonService;
 
@@ -37,7 +35,7 @@ public class PersonController {
         model.addAttribute("person", personService.findById(id));
         model.addAttribute("books", personService.findAllBooksByPersonId(id));
 
-        return "person/person_profile";
+        return "person/person_page";
     }
 
     @GetMapping("/new")

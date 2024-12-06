@@ -7,7 +7,12 @@
 </head>
 <body>
 <div class="details__container">
-    <h1>Карта читателя</h1>
+    <div class="home__link">
+        <a th:href="@{/authors}" class="home__btn">
+            <span class="arrow">&larr;</span>
+        </a>
+    </div>
+    <h1>Информация об авторе</h1>
     <div class="details__content">
         <div class="person-info">
             <p><strong>Имя:</strong> <span th:text="${author.getFullName()}"></span></p>

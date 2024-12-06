@@ -43,7 +43,7 @@ public class Book {
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person curBookOwner;
 
-    @OneToOne(mappedBy = "book")
+    @OneToOne(mappedBy = "book", cascade = CascadeType.ALL)
     private BookStatus bookStatus;
 
     @Transient

@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.danil.mvcDemo.model.Author;
 import ru.danil.mvcDemo.model.Book;
+import ru.danil.mvcDemo.model.BookStatus;
 import ru.danil.mvcDemo.model.Person;
+import ru.danil.mvcDemo.model.enumirate.BookStatusEnum;
 import ru.danil.mvcDemo.repository.BookRepository;
 
 import java.util.Date;
@@ -45,10 +47,16 @@ public class BookService {
 
     @Transactional
     public void save(Book book) {
-        book.setCreatedAt(new Date());
         Author tempAuth = new Author();
+        BookStatus bookStatus = new BookStatus();
+
         tempAuth.setId(book.getAuthor_id());
+        bookStatus.setBook(book);
+        bookStatus.setCurrentStatus(BookStatusEnum.AVAILABLE);
+
+        book.setCreatedAt(new Date());
         book.setBookAuthor(tempAuth);
+        book.setBookStatus(bookStatus);
 
         bookRepository.save(book);
     }
