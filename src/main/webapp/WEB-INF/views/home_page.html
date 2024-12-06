@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/resources/styles/home_page.css">
+</head>
+<body>
+<div class="home__container">
+    <h1>ЛибА</h1>
+    <div class="home__links">
+        <a class="btn link" th:href="@{/authors}">Авторы</a>
+        <a class="btn link" th:href="@{/books}">Книги</a>
+        <a class="btn link" th:href="@{/people}">Читатели</a>
+    </div>
+</div>
+</body>
+</html>

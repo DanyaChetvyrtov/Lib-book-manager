@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Person</title>
+    <link rel="stylesheet" href="/resources/styles/edit_person.css">
+</head>
+<body>
+<div class="form__container">
+    <h1>Обновить читателя</h1>
+    <form th:method="PATCH" th:action="@{/authors/{id}(id=${author.getId()})}" th:object="${author}">
+        <div class="form__group">
+            <label for="fullName">Имя: </label>
+            <input type="text" th:field="*{fullName}" id="fullName">
+            <div th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" style="color: red"></div>
+        </div>
+
+        <div class="form__group">
+            <label for="dateOfBirth">Возраст: </label>
+            <input type="text" th:field="*{dateOfBirth}" id="dateOfBirth">
+            <div th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}" style="color: red"></div>
+        </div>
+
+        <div class="form__actions">
+            <input class="btn save" type="submit" value="Изменить">
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

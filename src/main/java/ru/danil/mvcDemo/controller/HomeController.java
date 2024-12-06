@@ -1,18 +1,19 @@
 package ru.danil.mvcDemo.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import ru.danil.mvcDemo.model.Book;
-import ru.danil.mvcDemo.model.Person;
 
 
 // Контроллер для взаимодействия моделей book и person
 @Controller
-@RequestMapping("/admin")
-public class AdminController {
+@RequestMapping("/home")
+public class HomeController {
+
+    @GetMapping
+    public String home(){
+        return "home_page";
+    }
 //    private final PersonBookDAO personBookDAO;
 //
 //    public AdminController(PersonBookDAO personBookDAO) {

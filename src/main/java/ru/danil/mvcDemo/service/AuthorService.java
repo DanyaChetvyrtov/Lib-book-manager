@@ -28,6 +28,15 @@ public class AuthorService {
         return authorsRepository.findById(id).orElse(null);
     }
 
+    public List<Book> findBooksById(int id) {
+        Author author = authorsRepository.findById(id).orElse(null);
+        if (author == null) return null;
+
+        Hibernate.initialize(author.getBooks());
+
+        return author.getBooks();
+    }
+
     @Transactional
     public void save(Author author) {
         author.setCreatedAt(new Date());
