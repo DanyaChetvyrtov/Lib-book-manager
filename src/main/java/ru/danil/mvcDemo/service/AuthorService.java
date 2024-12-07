@@ -1,6 +1,8 @@
 package ru.danil.mvcDemo.service;
 
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.danil.mvcDemo.model.Author;
@@ -17,6 +19,10 @@ public class AuthorService {
 
     public AuthorService(AuthorsRepository authorsRepository) {
         this.authorsRepository = authorsRepository;
+    }
+
+    public List<Author> findAll(int page, int itemsPerPage) {
+        return authorsRepository.findAll(PageRequest.of(page, itemsPerPage, Sort.by("fullName"))).getContent();
     }
 
     public List<Author> findAll() {

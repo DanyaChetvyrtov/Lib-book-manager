@@ -30,7 +30,11 @@
 
     <div>
         <h2>Книги</h2>
-        <div th:if="${books}" class="books__list">
+        <div class="books__list">
+            <p
+                th:if="${books == null || books.isEmpty()}"
+                style="text-align: center"
+            >Тут пусто :(</p>
             <p th:each="book : ${books}" th:text="${book.getTitle()}"></p>
         </div>
     </div>

@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.danil.mvcDemo.model.Author;
-import ru.danil.mvcDemo.model.Book;
 import ru.danil.mvcDemo.service.AuthorService;
 
 @Controller
@@ -19,8 +18,12 @@ public class AuthorController {
     }
 
     @GetMapping
-    public String authors(Model model){
-        model.addAttribute("authors", authorService.findAll());
+    public String authors(
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "pagePerRequest", required = false, defaultValue = "5") int itemsPerRequest,
+            Model model
+    ){
+        model.addAttribute("authors", authorService.findAll(page, itemsPerRequest));
         return "author/author_list";
     }
 

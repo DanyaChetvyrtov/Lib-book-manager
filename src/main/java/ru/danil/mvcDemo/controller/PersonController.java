@@ -25,8 +25,12 @@ public class PersonController {
     }
 
     @GetMapping
-    public String people(Model model){
-        model.addAttribute("people", personService.findAll());
+    public String people(
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "pagePerRequest", required = false, defaultValue = "5") int itemsPerRequest,
+            Model model
+    ){
+        model.addAttribute("people", personService.findAll(page, itemsPerRequest));
         return "person/person_list";
     }
 

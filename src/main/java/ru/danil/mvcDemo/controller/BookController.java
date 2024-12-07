@@ -25,8 +25,12 @@ public class BookController {
     }
 
     @GetMapping
-    public String books(Model model){
-        model.addAttribute("books", bookService.findAll());
+    public String books(
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "pagePerRequest", required = false, defaultValue = "5") int itemsPerRequest,
+            Model model
+    ){
+        model.addAttribute("books", bookService.findAll(page, itemsPerRequest));
         return "book/book_list";
     }
 
