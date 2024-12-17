@@ -17,7 +17,7 @@
         <a class="card" th:href="@{/people/{id}(id=${person.getId()})}" th:each="person : ${people}">
             <div class="card__info">
                 <p><strong>ID:</strong> <span th:text="${person.getId()}"></span></p>
-                <p><strong>ФИО:</strong> <span th:text="${person.getFull_name()}"></span></p>
+                <p><strong>ФИО:</strong> <span th:text="${person.getFullName()}"></span></p>
                 <p><strong>Дата рождения:</strong> <span th:text="${person.getAge()}"></span></p>
             </div>
         </a>

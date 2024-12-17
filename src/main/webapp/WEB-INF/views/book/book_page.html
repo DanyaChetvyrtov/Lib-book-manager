@@ -23,7 +23,7 @@
 
     <div th:if="${owner}">
         <div class="details__reader">
-            <p><strong>Reader:</strong> <span th:text="${owner.getFull_name()}"></span></p>
+            <p><strong>Reader:</strong> <span th:text="${owner.getFullName()}"></span></p>
         </div>
 
         <form th:method="PATCH" th:action="@{/books/{id}/return_book(id=${book.getId()})}">
@@ -39,7 +39,7 @@
                     <option
                             th:each="person : ${people}"
                             th:value="${person.getId()}"
-                            th:text="${person.getFull_name()}"
+                            th:text="${person.getFullName()}"
                     ></option>
                 </select>
             </div>

@@ -2,9 +2,7 @@ package ru.danil.mvcDemo.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class Person {
     @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов")
     @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
             message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)")
-    private String full_name;
+    private String fullName;
 
     @Column(name = "age")
     @Max(value = 99, message = "Возраст не может быть больше 99")
@@ -50,9 +48,9 @@ public class Person {
     public Person() {
     }
 
-    public Person(Integer id, String full_name, Integer age, String email, String phoneNumber, Date createdAt, List<Book> reservedBooks) {
+    public Person(Integer id, String fullName, Integer age, String email, String phoneNumber, Date createdAt, List<Book> reservedBooks) {
         this.id = id;
-        this.full_name = full_name;
+        this.fullName = fullName;
         this.age = age;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -68,14 +66,19 @@ public class Person {
         this.id = id;
     }
 
-    public @NotEmpty @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов") @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
-            message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)") String getFull_name() {
-        return full_name;
+
+    @NotEmpty
+    @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов")
+    @Pattern(
+            regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
+            message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)")
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFull_name(@NotEmpty @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов") @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
+    public void setFullName(@NotEmpty @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов") @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
             message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)") String full_name) {
-        this.full_name = full_name;
+        this.fullName = full_name;
     }
 
     @Max(value = 99, message = "Возраст не может быть больше 99")
@@ -124,7 +127,7 @@ public class Person {
     public String toString() {
         return "Person{" +
                 "id=" + id +
-                ", full_name='" + full_name + '\'' +
+                ", fullName='" + fullName + '\'' +
                 '}';
     }
 }

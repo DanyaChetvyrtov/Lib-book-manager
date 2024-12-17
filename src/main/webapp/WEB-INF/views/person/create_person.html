@@ -11,8 +11,8 @@
     <form th:method="POST" th:action="@{/people}" th:object="${person}">
         <div class="form__group">
             <label for="full_name">Имя:</label>
-            <input type="text" th:field="*{full_name}" id="full_name" placeholder="Введите имя">
-            <div class="error-message" th:if="${#fields.hasErrors('full_name')}" th:errors="*{full_name}"></div>
+            <input type="text" th:field="*{fullName}" id="full_name" placeholder="Введите имя">
+            <div class="error-message" th:if="${#fields.hasErrors('full_name')}" th:errors="*{fullName}"></div>
         </div>
 
         <div class="form__group">

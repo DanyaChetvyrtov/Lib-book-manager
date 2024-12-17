@@ -2,6 +2,7 @@ package ru.danil.mvcDemo.controller;
 
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,11 +27,17 @@ public class BookController {
 
     @GetMapping
     public String books(
-            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(value = "pagePerRequest", required = false, defaultValue = "5") int itemsPerRequest,
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "5") int size,
             Model model
     ){
-        model.addAttribute("books", bookService.findAll(page, itemsPerRequest));
+
+        Page<Book> books = bookService.findAll(page, size);
+        model.addAttribute("books", books.getContent());
+        model.addAttribute("currentPage", books.getNumber() + 1);
+        model.addAttribute("totalPages", books.getTotalPages());
+        model.addAttribute("pageSize", size);
+
         return "book/book_list";
     }
 

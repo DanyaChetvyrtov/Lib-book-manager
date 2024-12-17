@@ -22,7 +22,7 @@ public class PersonService {
     }
 
     public List<Person> findAll(int page, int itemsPerPage) {
-        return personRepository.findAll(PageRequest.of(page, itemsPerPage, Sort.by("full_name"))).getContent();
+        return personRepository.findAll(PageRequest.of(page, itemsPerPage, Sort.by("fullName"))).getContent();
     }
 
     public List<Person> findAll() {
