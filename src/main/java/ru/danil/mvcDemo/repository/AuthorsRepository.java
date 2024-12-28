@@ -6,4 +6,5 @@ import ru.danil.mvcDemo.model.Author;
 
 @Repository
 public interface AuthorsRepository extends JpaRepository<Author, Integer> {
+    Author findByFullName(String fullName);
 }

@@ -1,22 +1,29 @@
 package ru.danil.mvcDemo.controller;
 
 import jakarta.validation.Valid;
+import org.hibernate.TypeMismatchException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.danil.mvcDemo.model.Author;
 import ru.danil.mvcDemo.model.Person;
 import ru.danil.mvcDemo.service.AuthorService;
+import ru.danil.mvcDemo.util.AuthorValidator;
+
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/authors")
 public class AuthorController {
     private final AuthorService authorService;
+    private final AuthorValidator authorValidator;
 
-    public AuthorController(AuthorService authorService) {
+    public AuthorController(AuthorService authorService, AuthorValidator authorValidator) {
         this.authorService = authorService;
+        this.authorValidator = authorValidator;
     }
 
     @GetMapping
@@ -55,6 +62,8 @@ public class AuthorController {
             @Valid @ModelAttribute("author") Author author,
             BindingResult bindingResult
     ){
+        authorValidator.validate(author, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "author/create_author";
         }

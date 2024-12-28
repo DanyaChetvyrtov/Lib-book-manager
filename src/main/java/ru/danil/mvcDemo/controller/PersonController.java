@@ -11,19 +11,18 @@ import ru.danil.mvcDemo.model.Person;
 import ru.danil.mvcDemo.repository.AuthorsRepository;
 import ru.danil.mvcDemo.service.BookService;
 import ru.danil.mvcDemo.service.PersonService;
+import ru.danil.mvcDemo.util.PersonValidator;
 
 
 @Controller
 @RequestMapping("/people")
 public class PersonController {
-    private final BookService bookService;
     private final PersonService personService;
-    private final AuthorsRepository authorsRepository;
+    private final PersonValidator personValidator;
 
-    public PersonController(BookService bookService, PersonService personService, AuthorsRepository authorsRepository) {
-        this.bookService = bookService;
+    public PersonController(PersonService personService, PersonValidator personValidator) {
         this.personService = personService;
-        this.authorsRepository = authorsRepository;
+        this.personValidator = personValidator;
     }
 
     @GetMapping
@@ -60,6 +59,8 @@ public class PersonController {
             @Valid @ModelAttribute("person") Person person,
             BindingResult bindingResult
     ){
+        personValidator.validate(person, bindingResult);
+
         if (bindingResult.hasErrors()) {
             return "person/create_person";
         }

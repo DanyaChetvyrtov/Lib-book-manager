@@ -26,7 +26,7 @@ public class Author {
     private String fullName;
 
     @Column(name = "date_of_birth")
-    @NotNull
+    @NotNull(message = "Нужно указать дату рождения")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dateOfBirth;
@@ -57,21 +57,19 @@ public class Author {
         this.id = id;
     }
 
-    public @NotEmpty(message = "Поле не может быть пустым") @Size(min = 5, max = 100, message = "Полное имя должно содержать от 5 до 100 символов") @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
-            message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)") String getFullName() {
+    public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(@NotEmpty(message = "Поле не может быть пустым") @Size(min = 5, max = 100, message = "Полное имя должно содержать от 5 до 100 символов") @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
-            message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)") String fullName) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
-    public @NotNull Date getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(@NotNull Date dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
