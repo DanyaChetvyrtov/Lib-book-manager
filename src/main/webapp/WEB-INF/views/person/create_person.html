@@ -12,7 +12,7 @@
         <div class="form__group">
             <label for="full_name">Имя:</label>
             <input type="text" th:field="*{fullName}" id="full_name" placeholder="Введите имя">
-            <div class="error-message" th:if="${#fields.hasErrors('full_name')}" th:errors="*{fullName}"></div>
+            <div class="error-message" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
         </div>
 
         <div class="form__group">

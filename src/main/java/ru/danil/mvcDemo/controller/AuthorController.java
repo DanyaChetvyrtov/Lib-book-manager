@@ -1,11 +1,13 @@
 package ru.danil.mvcDemo.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.danil.mvcDemo.model.Author;
+import ru.danil.mvcDemo.model.Person;
 import ru.danil.mvcDemo.service.AuthorService;
 
 @Controller
@@ -19,11 +21,17 @@ public class AuthorController {
 
     @GetMapping
     public String authors(
-            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(value = "pagePerRequest", required = false, defaultValue = "5") int itemsPerRequest,
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "5") int size,
             Model model
     ){
-        model.addAttribute("authors", authorService.findAll(page, itemsPerRequest));
+
+        Page<Author> authors = authorService.findAll(page, size);
+        model.addAttribute("authors", authors.getContent());
+        model.addAttribute("currentPage", authors.getNumber() + 1);
+        model.addAttribute("totalPages", authors.getTotalPages());
+        model.addAttribute("pageSize", size);
+
         return "author/author_list";
     }
 

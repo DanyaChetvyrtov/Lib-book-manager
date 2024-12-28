@@ -1,10 +1,12 @@
 package ru.danil.mvcDemo.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.danil.mvcDemo.model.Book;
 import ru.danil.mvcDemo.model.Person;
 import ru.danil.mvcDemo.repository.AuthorsRepository;
 import ru.danil.mvcDemo.service.BookService;
@@ -26,11 +28,16 @@ public class PersonController {
 
     @GetMapping
     public String people(
-            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(value = "pagePerRequest", required = false, defaultValue = "5") int itemsPerRequest,
+            @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "5") int size,
             Model model
     ){
-        model.addAttribute("people", personService.findAll(page, itemsPerRequest));
+        Page<Person> people = personService.findAll(page, size);
+        model.addAttribute("people", people.getContent());
+        model.addAttribute("currentPage", people.getNumber() + 1);
+        model.addAttribute("totalPages", people.getTotalPages());
+        model.addAttribute("pageSize", size);
+
         return "person/person_list";
     }
 

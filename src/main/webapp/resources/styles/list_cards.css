@@ -177,6 +177,9 @@ h1 {
     cursor: default;
 }
 
+.previous-page, .next-page{
+    width: 90px;
+}
 /* Отключенные кнопки */
 .page-item.disabled .page-link {
     background-color: #e9ecef;

@@ -31,7 +31,7 @@
         <ul class="pagination">
             <!-- Кнопка "Предыдущая страница" -->
             <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-                <a class="page-link" th:href="@{'/books'(page=${currentPage - 1}, size=${pageSize})}">&laquo; Previous</a>
+                <a class="previous-page page-link" th:href="@{'/books'(page=${currentPage - 1}, size=${pageSize})}">&laquo; Previous</a>
             </li>
 
             <!-- Номера страниц -->
@@ -43,7 +43,7 @@
 
             <!-- Кнопка "Следующая страница" -->
             <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
-                <a class="page-link" th:href="@{'/books'(page=${currentPage + 1}, size=${pageSize})}">Next &raquo;</a>
+                <a class="next-page page-link" th:href="@{'/books'(page=${currentPage + 1}, size=${pageSize})}">Next &raquo;</a>
             </li>
         </ul>
     </nav>

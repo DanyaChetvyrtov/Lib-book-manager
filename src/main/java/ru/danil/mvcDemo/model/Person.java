@@ -16,7 +16,7 @@ public class Person {
 
     @Column(name = "full_name")
     @NotEmpty
-    @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов")
+    @Size(min = 10, max = 60, message = "Ваше фио должно содержать от 10 до 60 символов")
     @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
             message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)")
     private String fullName;
@@ -28,13 +28,16 @@ public class Person {
 
     @Column(name = "email")
     @Email
-    @NotEmpty
+    @NotEmpty(message = "введите email")
     @Size(max = 100, message = "Email не может содержать более 100 симовлов")
     private String email;
 
     @Column(name = "phone_number")
-    @NotEmpty
-    @Size(max = 20, message = "Email не может содержать более 20 симовлов")
+    @NotEmpty(message = "Номер не должен быть пуст")
+    @Pattern(
+            regexp = "\\+7\\(\\d{3}\\)\\d{3}-\\d{2}-\\d{2}",
+            message = "Формат номера должен быть +7(000)000-00-00"
+    )
     private String phoneNumber;
 
     @Column(name = "created_at")
@@ -44,9 +47,7 @@ public class Person {
     @OneToMany(mappedBy = "curBookOwner")
     private List<Book> reservedBooks;
 
-
-    public Person() {
-    }
+    public Person() {}
 
     public Person(Integer id, String fullName, Integer age, String email, String phoneNumber, Date createdAt, List<Book> reservedBooks) {
         this.id = id;
@@ -66,44 +67,35 @@ public class Person {
         this.id = id;
     }
 
-
-    @NotEmpty
-    @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов")
-    @Pattern(
-            regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
-            message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)")
     public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(@NotEmpty @Size(min = 10, max = 100, message = "Ваше фио должно содержать от 10 до 60 символов") @Pattern(regexp = "[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+",
-            message = "Фио должно соответствовать: Фамилия Имя Отчество\n(обратите внимание на пробелы)") String full_name) {
+    public void setFullName(String full_name) {
         this.fullName = full_name;
     }
 
-    @Max(value = 99, message = "Возраст не может быть больше 99")
-    @Min(value = 11, message = "Возраст не может быть меньше 11")
     public Integer getAge() {
         return age;
     }
 
-    public void setAge(@Max(value = 99, message = "Возраст не может быть больше 99") @Min(value = 11, message = "Возраст не может быть меньше 11") Integer age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
-    public @Email @NotEmpty @Size(max = 100, message = "Email не может содержать более 100 симовлов") String getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(@Email @NotEmpty @Size(max = 100, message = "Email не может содержать более 100 симовлов") String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public @NotEmpty @Size(max = 20, message = "Email не может содержать более 20 симовлов") String getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(@NotEmpty @Size(max = 20, message = "Email не может содержать более 20 симовлов") String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

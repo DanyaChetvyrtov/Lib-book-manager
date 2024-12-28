@@ -1,6 +1,7 @@
 package ru.danil.mvcDemo.service;
 
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,8 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public List<Person> findAll(int page, int itemsPerPage) {
-        return personRepository.findAll(PageRequest.of(page, itemsPerPage, Sort.by("fullName"))).getContent();
+    public Page<Person> findAll(int page, int itemsPerPage) {
+        return personRepository.findAll(PageRequest.of(page - 1, itemsPerPage, Sort.by("fullName")));
     }
 
     public List<Person> findAll() {
