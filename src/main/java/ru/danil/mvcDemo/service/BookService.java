@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.danil.mvcDemo.exception.BookNotFound;
 import ru.danil.mvcDemo.model.Author;
 import ru.danil.mvcDemo.model.Book;
 import ru.danil.mvcDemo.model.BookStatus;
@@ -33,7 +34,7 @@ public class BookService {
 
     public Book findById(int id) {
         return bookRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Book not found")
+                () -> new BookNotFound("Book with ID = " + id + " not found")
         );
     }
 
