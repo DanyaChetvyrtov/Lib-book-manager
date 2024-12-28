@@ -99,9 +99,9 @@ public class BookService {
                 () -> new RuntimeException("Person not found")
         );
 
-        book.getBookStatus().setCurrentStatus(BookStatusEnum.RESERVED);
-        book.getBookStatus().setTaking_date(new Date());
         book.setCurBookOwner(person);
+        book.getBookStatus().setTaking_date(new Date());
+        book.getBookStatus().setCurrentStatus(BookStatusEnum.RESERVED);
 
         bookRepository.save(book);
     }
@@ -114,12 +114,12 @@ public class BookService {
 
         Person curOwner = book.getCurBookOwner();
 
-        if(curOwner == null) throw new RuntimeException("Book has not an owner");
+        if(curOwner == null) throw new RuntimeException("Book has no owner");
 
         book.getBookStatus().setCurrentStatus(BookStatusEnum.AVAILABLE);
         book.getBookStatus().setTaking_date(null);
-
         book.setCurBookOwner(null);
+
         curOwner.setReservedBook(null);
 
         bookRepository.save(book);

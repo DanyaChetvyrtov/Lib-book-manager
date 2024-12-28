@@ -23,7 +23,12 @@
 
     <div th:if="${owner}">
         <div class="details__reader">
-            <p><strong>Reader:</strong> <span th:text="${owner.getFullName()}"></span></p>
+            <p>
+                <strong>Reader:</strong> <a
+                    class="reader-link"
+                    th:text="${owner.getFullName()}"
+                    th:href="@{/people/{ownerId}(ownerId=${owner.getId()})}"></a>
+            </p>
         </div>
 
         <form th:method="PATCH" th:action="@{/books/{id}/return_book(id=${book.getId()})}">

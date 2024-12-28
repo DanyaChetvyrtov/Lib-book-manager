@@ -95,7 +95,7 @@ h1, h2 {
 }
 
 /* Список книг */
-.books__list {
+.books-list {
     background: #f9f9f9;
     padding: 15px;
     border-radius: 8px;
@@ -103,7 +103,7 @@ h1, h2 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.books__list p {
+.books-list p {
     font-size: 16px;
     color: #444;
     margin-bottom: 5px;
@@ -135,4 +135,25 @@ h1, h2 {
 .home__btn .arrow {
     margin-right: 5px;
     font-size: 18px;
+}
+
+.books-list{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items:center;
+}
+
+a.book-link {
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s;
+
+    padding: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+a.book-link:hover {
+    color: #333333;
 }
