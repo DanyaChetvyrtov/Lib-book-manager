@@ -11,7 +11,7 @@ body {
     color: #333;
 }
 
-.not-found-container {
+.not-found-container, .internal-error-container {
     text-align: center;
     padding: 40px;
     background: white;
@@ -19,13 +19,13 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.not-found-container h1 {
+.not-found-container h1, .internal-error-container h1 {
     font-size: 96px;
     margin-bottom: 20px;
     color: #007bff;
 }
 
-.not-found-container p {
+.not-found-container p, .internal-error-container p {
     font-size: 18px;
     margin-bottom: 30px;
     color: #555;

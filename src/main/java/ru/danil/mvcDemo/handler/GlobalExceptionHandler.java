@@ -14,4 +14,10 @@ public class GlobalExceptionHandler {
         model.addAttribute("error", ex.getMessage());
         return "error/404";
     }
+
+    @ExceptionHandler(Exception.class)
+    public String handleGeneralException(Exception ex, Model model) {
+        model.addAttribute("error", ex.getMessage());
+        return "error/500";
+    }
 }

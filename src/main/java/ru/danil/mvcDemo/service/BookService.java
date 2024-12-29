@@ -110,7 +110,7 @@ public class BookService {
     @Transactional
     public void returnBook(int bookId){
         Book book = bookRepository.findById(bookId).orElseThrow(
-                () -> new RuntimeException("Book not found")
+                () -> new BookNotFound("Book not found")
         );
 
         Person curOwner = book.getCurBookOwner();
