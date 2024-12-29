@@ -13,6 +13,12 @@
         <a class="btn link" th:href="@{/books}">Книги</a>
         <a class="btn link" th:href="@{/people}">Читатели</a>
     </div>
+    <div class="quote__container">
+        <blockquote>
+            <p th:text="${quote.text}"></p>
+            <footer th:text="${quote.author}"></footer>
+        </blockquote>
+    </div>
 </div>
 </body>
 </html>

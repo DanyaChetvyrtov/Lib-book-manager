@@ -64,8 +64,14 @@ public class PersonService {
     public void delete(Person person) {
 
         person.getReservedBook().forEach(
-                book -> book.getBookStatus().setCurrentStatus(BookStatusEnum.AVAILABLE)
+                book -> {
+                    book.getBookStatus().setCurrentStatus(BookStatusEnum.AVAILABLE);
+                    book.getBookStatus().setTaking_date(null);
+                    book.setCurBookOwner(null);
+                }
         );
+
+        person.setReservedBook(null);
 
         personRepository.delete(person);
     }
