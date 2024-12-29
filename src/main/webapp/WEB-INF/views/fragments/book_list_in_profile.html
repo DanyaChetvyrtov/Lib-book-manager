@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book List Fragment</title>
+</head>
+<body>
+<div th:fragment="book_list (books)">
+    <div>
+        <h2>Книги</h2>
+        <div class="books-list">
+            <p
+                    th:if="${books == null || books.isEmpty()}"
+                    style="text-align: center"
+            >Тут пусто :(</p>
+            <a
+                    class="book-link"
+                    th:each="book : ${books}"
+                    th:text="${book.getTitle()}"
+                    th:href="@{/books/{bookId}(bookId=${book.getId()})}"
+            ></a>
+        </div>
+    </div>
+</div>
+</body>

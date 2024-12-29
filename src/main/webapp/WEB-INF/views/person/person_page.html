@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Person Details</title>
     <link rel="stylesheet" href="/resources/styles/model_page.css">
+    <link rel="stylesheet" href="/resources/styles/general_styles/general.css">
+    <link rel="stylesheet" href="/resources/styles/general_styles/btns.css">
+    <link rel="stylesheet" href="/resources/styles/model_details.css">
 </head>
 <body>
 <div class="details__container">
@@ -28,21 +31,7 @@
         </div>
     </div>
 
-    <div>
-        <h2>Книги</h2>
-        <div class="books-list">
-            <p
-                th:if="${books == null || books.isEmpty()}"
-                style="text-align: center"
-            >Тут пусто :(</p>
-            <a
-                class="book-link"
-                th:each="book : ${books}"
-                th:text="${book.getTitle()}"
-                th:href="@{/books/{bookId}(bookId=${book.getId()})}"
-            ></a>
-        </div>
-    </div>
+    <div th:replace="fragments/book_list_in_profile :: book_list(${books})"></div>
 </div>
 </body>
 </html>
