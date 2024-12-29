@@ -16,7 +16,7 @@ import ru.danil.mvcDemo.repository.BookRepository;
 import ru.danil.mvcDemo.repository.PersonRepository;
 
 import java.util.Date;
-import java.util.List;
+
 
 @Service
 public class BookService {
@@ -40,7 +40,7 @@ public class BookService {
 
     public Person findCurOwner(int id) {
         Book book = bookRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Book not found")
+                () -> new BookNotFound("Book not found")
         );
 
         Hibernate.initialize(book.getCurBookOwner());
@@ -49,7 +49,7 @@ public class BookService {
 
     public Author findAuthor(int id) {
         Book book = bookRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Book not found")
+                () -> new BookNotFound("Book not found")
         );
 
         Hibernate.initialize(book.getBookAuthor());

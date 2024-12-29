@@ -2,8 +2,6 @@ package ru.danil.mvcDemo.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -49,8 +47,7 @@ public class Book {
     @Transient
     private Integer author_id;
 
-    public Book() {
-    }
+    public Book() {}
 
     public Book(Integer id, String title, String description, Date releaseDate, Date createdAt, Author bookAuthor, Person curBookOwner, BookStatus bookStatus) {
         this.id = id;
@@ -71,11 +68,11 @@ public class Book {
         this.id = id;
     }
 
-    public @NotEmpty @Size(min = 2, max = 100, message = "Название может содержать от 2х до 100 символов") String getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(@NotEmpty @Size(min = 2, max = 100, message = "Название может содержать от 2х до 100 символов") String title) {
+    public void setTitle(String title) {
         this.title = title;
     }
 

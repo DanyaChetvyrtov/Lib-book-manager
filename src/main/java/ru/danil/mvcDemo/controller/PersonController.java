@@ -6,10 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.danil.mvcDemo.model.Book;
 import ru.danil.mvcDemo.model.Person;
-import ru.danil.mvcDemo.repository.AuthorsRepository;
-import ru.danil.mvcDemo.service.BookService;
 import ru.danil.mvcDemo.service.PersonService;
 import ru.danil.mvcDemo.util.PersonValidator;
 

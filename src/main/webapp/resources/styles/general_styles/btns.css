@@ -1,0 +1,44 @@
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+/* В файлах, где использовался файл edit_person заменить названия классов с .btn.save на данный */
+.btn.submit {
+    background-color: #28a745;
+}
+
+.btn.submit:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.home__btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home__btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.home__btn .arrow {
+    margin-right: 5px;
+    font-size: 18px;
+}
+

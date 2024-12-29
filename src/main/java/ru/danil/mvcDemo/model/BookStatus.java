@@ -40,11 +40,11 @@ public class BookStatus {
         this.book = book;
     }
 
-    public @NotNull BookStatusEnum getCurrentStatus() {
+    public BookStatusEnum getCurrentStatus() {
         return currentStatus;
     }
 
-    public void setCurrentStatus(@NotNull BookStatusEnum currentStatus) {
+    public void setCurrentStatus(BookStatusEnum currentStatus) {
         this.currentStatus = currentStatus;
     }
 

@@ -17,7 +17,7 @@
             <p><strong>Название:</strong> <span th:text="${book.getTitle()}"></span></p>
             <p><strong>Автор:</strong> <span th:text="${book.getBookAuthor().getFullName()}"></span></p>
             <p><strong>Дата публикации:</strong> <span th:text="${book.getReleaseDate()}"></span></p>
-            <p><strong>Описание:</strong> <span th:text="${book.getDescription()}"></span></p>
+            <p><strong>Описание:</strong> <p th:text="${book.getDescription()}"></p></p>
         </div>
 
 

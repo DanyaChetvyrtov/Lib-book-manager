@@ -1,0 +1,80 @@
+.list__container {
+    width: 70%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Общий стиль списка */
+.list__content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Карточка */
+.card, .create__btn a {
+    background: #f9f9f9;
+    padding: 15px;
+
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.create__btn a:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Информация о человеке */
+.card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 16px;
+    color: #444;
+}
+
+.card__info p {
+    margin: 0;
+}
+
+.card__info strong {
+    color: #000;
+}
+
+
+.create__btn{
+    display: flex;
+    justify-content: center;
+}
+
+.create__btn a{
+    margin-top: 15px;
+    padding: 8px 12px;
+    color: #000;
+}
+
+.home__link {
+    margin: 10px;
+}

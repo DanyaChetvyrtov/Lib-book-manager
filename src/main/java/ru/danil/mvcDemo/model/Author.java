@@ -38,8 +38,7 @@ public class Author {
     @OneToMany(mappedBy = "bookAuthor")
     private List<Book> books;
 
-    public Author() {
-    }
+    public Author() {}
 
     public Author(Integer id, String fullName, Date dateOfBirth, Date createdAt, List<Book> books) {
         this.id = id;
