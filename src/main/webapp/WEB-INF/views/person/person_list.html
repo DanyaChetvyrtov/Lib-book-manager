@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>People List</title>
     <link rel="stylesheet" href="/resources/styles/general_styles/general.css">
+    <link rel="stylesheet" href="/resources/styles/general_styles/btns.css">
     <link rel="stylesheet" href="/resources/styles/general_styles/list.css">
     <link rel="stylesheet" href="/resources/styles/general_styles/pagination.css">
 </head>
@@ -24,26 +25,9 @@
             </div>
         </a>
     </div>
-    <nav aria-label="Page navigation" class="pagination__container">
-        <ul class="pagination">
-            <!-- Кнопка "Предыдущая страница" -->
-            <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-                <a class="previous-page page-link" th:href="@{'/people'(page=${currentPage - 1}, size=${pageSize})}">&laquo;</a>
-            </li>
 
-            <!-- Номера страниц -->
-            <li class="page-item" th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
-                th:classappend="${pageNum == currentPage} ? 'active'">
-                <a class="page-link" th:href="@{'/people'(page=${pageNum}, size=${pageSize})}"
-                   th:text="${pageNum}"></a>
-            </li>
+    <div th:replace="fragments/pagination :: pagination (${currentPage}, ${totalPages}, ${pageSize}, 'people')"></div>
 
-            <!-- Кнопка "Следующая страница" -->
-            <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
-                <a class="next-page page-link" th:href="@{'/people'(page=${currentPage + 1}, size=${pageSize})}">&raquo;</a>
-            </li>
-        </ul>
-    </nav>
     <div class="create__btn">
         <a th:href="@{/people/new}">Добавить</a>
     </div>
