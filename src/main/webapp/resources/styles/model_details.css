@@ -12,3 +12,8 @@ h1, h2 {
     color: #333;
     margin-bottom: 20px;
 }
+
+
+.home__link {
+    margin: 10px;
+}

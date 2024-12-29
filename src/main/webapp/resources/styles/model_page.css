@@ -63,12 +63,6 @@
     margin-bottom: 5px;
 }
 
-/* Ссылка Home */
-.home__link {
-    margin: 10px;
-}
-
-
 .books-list{
     display: flex;
     flex-direction: column-reverse;
