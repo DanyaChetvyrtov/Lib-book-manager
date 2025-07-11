@@ -9,6 +9,10 @@ services:
       POSTGRES_PASSWORD: root
       PGDATA: /data/postgres
       POSTGRES_DB: book_manager
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - main-net
 
   book-manager-app:
     image: danilchet/book-manager
@@ -16,14 +20,17 @@ services:
     ports:
       - "8400:8400"
     environment:
-      DB_URL: jdbc:postgresql://book-manager-db:5432/book_manager
-      DB_USERNAME: postgres
-      DB_PASSWORD: root
+      SPRING_DATASOURCE_URL: jdbc:postgresql://book-manager-db:5432/book_manager
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
     depends_on:
       - book-manager-db
+    networks:
+      - main-net
 
 networks:
   main-net:
     driver: bridge
 
 volumes:
+  postgres:
