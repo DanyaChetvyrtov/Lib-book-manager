@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Person Details</title>
+    <link rel="stylesheet" href="/styles/model_page.css">
+    <link rel="stylesheet" href="/styles/general_styles/general.css">
+    <link rel="stylesheet" href="/styles/general_styles/btns.css">
+    <link rel="stylesheet" href="/styles/model_details.css">
+</head>
+<body>
+<div class="details__container">
+    <div class="home__link">
+        <a th:href="@{/authors}" class="home__btn">
+            <span class="arrow">&larr;</span>
+        </a>
+    </div>
+
+
+    <h1>Информация об авторе</h1>
+    <div class="details__content">
+        <div class="person-info">
+            <p><strong>Имя:</strong> <span th:text="${author.getFullName()}"></span></p>
+            <p><strong>Возраст:</strong> <span th:text="${author.getDateOfBirth()}"></span></p>
+        </div>
+        <div class="actions">
+            <a class="btn edit" th:href="@{/authors/{id}/edit(id=${author.getId()})}">Обновить</a>
+            <form th:method="DELETE" th:action="@{/authors/{id}(id=${author.getId()})}">
+                <input class="btn delete" type="submit" th:value="Удалить">
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="fragments/book_list_in_profile :: book_list(${books})"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+services:
+  book-manager-db:
+    image: postgres:16-alpine
+    container_name: book-manager-db-container
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      PGDATA: /data/postgres
+      POSTGRES_DB: book_manager
+
+  book-manager-app:
+    image: danilchet/book-manager
+    container_name: book-manager-app-container
+    ports:
+      - "8400:8400"
+    environment:
+      DB_URL: jdbc:postgresql://book-manager-db:5432/book_manager
+      DB_USERNAME: postgres
+      DB_PASSWORD: root
+    depends_on:
+      - book-manager-db
+
+networks:
+  main-net:
+    driver: bridge
+
+volumes:

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book List</title>
+    <link rel="stylesheet" href="/styles/general_styles/general.css">
+    <link rel="stylesheet" href="/styles/general_styles/btns.css">
+    <link rel="stylesheet" href="/styles/general_styles/list.css">
+    <link rel="stylesheet" href="/styles/general_styles/pagination.css">
+</head>
+<body>
+<div class="list__container">
+    <div class="home__link">
+        <a th:href="@{/home}" class="home__btn">
+            <span class="arrow">&larr;</span>
+        </a>
+    </div>
+    <h1>Книги</h1>
+    <div class="list__content">
+        <a class="card" th:href="@{/books/{id}(id=${book.getId()})}" th:each="book : ${books}">
+            <div class="card__info">
+                <p th:switch="${book.getBookStatus().getCurrentStatus().toString()}"><strong>
+                    <span th:case="AVAILABLE" style="color: #28a745">Доступна</span>
+                    <span th:case="RESERVED" style="color: #dc3545">Занята</span>
+                    <span th:case="TEMPORARILY_UNAVAILABLE" style="color: #5a6268">Временно недоступна</span>
+                    <span th:case="*">Что-то не то</span>
+                </strong></p>
+                <p><strong>Название:</strong> <span th:text="${book.getTitle()}"></span></p>
+                <p><strong>Автор:</strong> <span th:text="${book.getBookAuthor().getFullName()}"></span></p>
+            </div>
+        </a>
+    </div>
+
+    <div th:replace="fragments/pagination :: pagination (${currentPage}, ${totalPages}, ${pageSize}, 'books')"></div>
+
+    <div class="create__btn">
+        <a th:href="@{/books/new}">Добавить</a>
+    </div>
+</div>
+</body>
+</html>

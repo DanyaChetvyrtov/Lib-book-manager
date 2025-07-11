@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new book</title>
+    <link rel="stylesheet" href="/styles/general_styles/general.css">
+    <link rel="stylesheet" href="/styles/general_styles/form.css">
+    <link rel="stylesheet" href="/styles/general_styles/btns.css">
+    <link rel="stylesheet" href="/styles/create_form.css">
+</head>
+<body>
+<div class="form__container">
+    <h1>Добавить книгу</h1>
+    <form th:method="POST" th:action="@{/books}" th:object="${book}">
+        <div class="form__group">
+            <label for="title">Название: </label>
+            <input id="title" type="text" th:field="*{title}">
+            <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color: red"></div>
+        </div>
+
+        <div class="form__group">
+            <label for="author">Автор: </label>
+            <select id="author" name="author_id">
+                <option
+                        th:each="author : ${authors}"
+                        th:value="${author.getId()}"
+                        th:text="${author.getFullName()}"
+                ></option>
+            </select>
+        </div>
+
+        <div class="form__group">
+            <label for="releaseDate">Дата публикации: </label>
+            <input id="releaseDate" type="text" th:field="*{releaseDate}">
+            <div th:if="${#fields.hasErrors('releaseDate')}" th:errors="*{releaseDate}" style="color: red"></div>
+        </div>
+
+        <div class="form__group">
+            <label for="description">Описание: </label>
+            <input id="description" type="text" th:field="*{description}">
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color: red"></div>
+        </div>
+
+
+        <div class="form__actions">
+            <input class="btn submit" type="submit" value="Создать">
+        </div>
+    </form>
+</div>
+</body>
+</html>

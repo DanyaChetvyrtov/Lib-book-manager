@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Not Found</title>
+    <link rel="stylesheet" href="/styles/general_styles/general.css">
+    <link rel="stylesheet" href="/styles/errors.css">
+</head>
+<body>
+    <div class="not-found-container">
+        <h1>404</h1>
+        <p th:text="${error}"></p>
+        <a th:href="@{/home}" class="home-btn">На главную</a>
+    </div>
+</body>
+</html>
