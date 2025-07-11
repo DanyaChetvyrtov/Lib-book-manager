@@ -1,0 +1,45 @@
+name: CD Pipeline (Docker Compose)
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline for Spring Boot"]  # Зависит от успешного CI
+    branches: [ main ]
+    types: [ completed ]
+  workflow_dispatch:
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Docker Compose
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/v2.23.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+
+      - name: Copy files to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "docker-compose.yml"
+          target: "/opt/myapp/"
+
+      - name: Deploy with Compose
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /opt/myapp
+            docker-compose down
+            docker rm $(docker ps -a -q --filter "ancestor=danilchet/book-manager")
+            docker rmi danilchet/book-manager
+            docker-compose pull danilchet/book-manager 
+            docker-compose up -d
